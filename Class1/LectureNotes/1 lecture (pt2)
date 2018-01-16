@@ -1,0 +1,92 @@
+Networks Notes:      COMMUNICATING
+Lecture 1 part 1
+----------------
+
+IP gives us the best effore datagram forwarding
+	- very simple
+	- large part of why internet succeeded
+	- but doesnt givemuch
+
+Layers give us a way to COMPOSE functionality
+	- Eg. HTTP over TCP for web browsers with reliable connections
+
+However, they do not tell us where in the network to implement the functionaility
+
+=======================================================
+Where do we distribute functionality accross devices?
+	- Eg.who is responsibility
+
+The End-to-end arguments in System Design"
+	- Sacred text of the internet
+	- Endlessly debated by researchers and engineers
+
+=======================================================
+Basic Observation
+
+Some applications have end to end requirements
+	(security, reliabilitty, etc.)
+
+Implementing this stuff inside the network is hard
+	- every step of the way must be fail proof
+	- different applications have different needs
+
+End hosts 
+	- cant depend on the network
+	- cant satisfy these requirements without network level support
+
+Instead of making the network reliable, 
+Solution is APp level, end to end check, and retry on failure
+
+=======================================================
+Conservative Interpertation:
+
+	Dont implement a function at the lower levels of the system unless it can be completely implemented at this level
+
+	basically, unless you can completely remove the burden from end hosts, don't bother
+
+=======================================================
+Radical Interpertation:
+	
+	Dont implement anything in the network that can be implemented correctly by the hosts
+
+	This makes the network layer very minimal
+
+	Ignores performance issues
+
+=======================================================
+Moderate Interpertation:
+
+	Think twice before implementing functionality in the network
+
+	If hosts can implement functionality correctly, implement it on a lower layer only as a performance enhancer
+
+	But do so only if it does not impose burden on applications that do not require that functionality, and if it doesnt cost $$$
+
+=======================================================
+Anonymity:
+
+	Should this be implemented in the network?
+
+	Howabout at the endpoints?
+
+=======================================================
+Reality check: Layering and end-to-end protocols ideas are regularly violated
+
+	There is a conflicting interest between Archetectural Purity and Commercial Needs 
+
+=======================================================
+Takeaways:
+
+	Layering for network functions:
+		- helps manage diversity in computer networks
+		- not optimal for everything, but simple and flexible
+
+	"Narrow waist" ensures interoperability, enables innovation
+
+	End-to-Emd argument (attempts) to keep the IP layer simple
+
+	Think carefully when adding functionality to the network
+
+=======================================================
+
+

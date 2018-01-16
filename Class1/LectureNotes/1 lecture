@@ -1,0 +1,189 @@
+Networks Notes:      LAYERING
+Lecture 1 part 1
+----------------
+
+
+The OSI model  (Open Systems Interconnect)
+
+	Application
+	Presentation
+	Session
+	Transport
+	Nework
+	Data Link
+	Physical
+
+
+For each
+
+	Service			- what does it DO
+	Interface		- how do you ACCESS
+	Proocol			- how is it IMPLEMENTED
+
+=======================================================
+PHYSICAL LAYER (Hardware Layer)
+
+	Service
+		Moves information between two systems commected by physical ink
+
+	Interface
+		Specifies how to send one bit
+
+	Protocol
+		Encoding scheme for one bit
+		Voltage levels
+		Signal timing
+
+========================================================
+DATA LINK LAYER (Eg. Ethernet, Wifi, DOCSIS)
+
+	Service
+		Data framing; the boundries between packets
+		MAC addresses
+		flow control
+
+	Interface
+		Sends a single packet between two hosts using the same media
+
+	Protocol
+		Physical addressing (eg. MAC addresses)
+
+========================================================
+NETWORK LAYER (Eg. IP, IPv6)
+
+	Service
+		delivers packets accross the network
+		handles fragmentation and reassembly
+		handles packet scheduling
+		handles buffer management
+
+	Interface
+		Sends one packet to a specific destination
+
+	Protocol
+		Define globally unique addresses
+		Maintains routing tables
+
+========================================================
+TRANSPORT LAYER (UDP, TCP)
+
+	Service
+		Multiplexing/demultiplexing (creating and decreating complex signals)
+		Congestion control
+		Reliable delivery
+
+	Interface
+		Send messages to a destination
+
+	Protocol
+		Port numbers
+		error correction
+		flow-control information
+
+========================================================
+SESSION LAYER (???)
+
+	Service
+		Access management
+		Synchromization
+		Manages the setting up and taking down of connections
+
+	Interface
+		It depends
+
+	Protocol
+		Manages Tokens
+		Inserts checkpoints
+
+========================================================
+PRESENTATION LAYER (Part of the OS, clear>encrypted>clear)
+
+	Service
+		Convert data between different representations
+		Eg. endian to little endian (order a sequence of bytes is stored)
+		Eg. ASCII to Unicode
+
+	Interface
+		it depends
+
+	Protocol
+		Defines data formats
+		Applies transformation rules
+
+========================================================
+APPLICATION LAYER (any application)
+
+	Service
+		Any service (eg. a browser)
+
+	Interface
+		Many ways
+
+	Protocol
+		Many ways
+
+========================================================
+
+Think of it like a postal system
+
+HOST 1 -> Switch -> HOST 2
+
+========================================================
+Parts of a network:
+
+	WEB SERVER 
+		Http header , web page
+
+	TCP SEGMENT
+		TCP header, http header, web page
+
+	IP DATAGRAM
+		IP Header, TCP header, Http header, web page
+
+	ETHERNET FRAME
+		Ethernet frame, ...all the above..., Ethernet Trailer
+
+========================================================
+The Hourglass idea	
+
+	All applications function on all layers
+	All networks inter-operate
+	Room for development above and below IP
+	but changing IP protocol is insantely hard
+
+========================================================
+ORTHOGONAL PLANES
+
+Control plane : how internet paths are ESTABLISHED
+
+	Application
+	Presentation
+	Session
+	Transport
+	IP   <--------------BGP, RIP, OSPF  == control plane (will be explained later)
+	Data Link
+	Physical
+
+Data Plane : how data is FORWARDED over internet paths
+
+	Host 1            Switch(es)     Host 2
+
+	Application                      Application
+	Transport                        Transport
+	Network           Network        Network
+	Data Link   --->  Data Link ---> Data Link
+
+========================================================
+
+Reality Check : the layered abstraction is nice, but doesnt really hold up
+
+	Firewalls
+		Analyze application layer headers
+
+	Transparent Proxies
+		Simulate application endpoints within the network
+
+	NATs
+		Break end to end network reachability
+
+========================================================
