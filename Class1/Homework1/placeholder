@@ -1,1 +1,28 @@
-placeholder
+Goals of assignment:
+
+
+make a client program that communicates to server using sockets
+
+listens for requests on tcp socket bound to port 27993
+
+
+PROTOCOL
+4 messages: HELLO, STATUS, SOLUTION, BYE
+
+1. client initiates the protocol by creating tcp socket connection to server
+2. once connected, client sends HELLO message to server
+	hello is: ____ HELLO 1
+3. the server then replies with a STATUS
+	status is: ___ STATUS [a number] [a math operator] [a number]\n
+4. client returns with SOLUTION
+	solution is: ___ [the solution]
+	solution can be negative, for division floor
+5. server will then either respond with another STATUS or BYE
+
+	if BYE:
+		means solution was correct
+	if STATUS
+		program must solve the expression and retur another SOLUTION
+
+6. eventually the server will return a BYE message	
+	the BYE message will contain the 64 byte flag
