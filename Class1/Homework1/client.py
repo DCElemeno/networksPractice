@@ -18,7 +18,6 @@ s.connect((host, port))
 # once connected send HELLO message
 s.sendall(b'cs5700spring2017 HELLO 1\n')
 data = s.recv(1024)
-s.close()
 
 # recieve STATUS
 print('Received', repr(data))
@@ -38,7 +37,10 @@ def createSolution(num1, operator, num2):
 
 # return solution
 
+
+
 # handle BYE
+s.close()
 
 
 # debugging stuff
