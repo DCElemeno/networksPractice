@@ -1,6 +1,7 @@
 # setup
 import socket
 import sys
+import math
 args = sys.argv
 
 # grab arguments
@@ -16,11 +17,11 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((host, port))
 
 # once connected send HELLO message
-s.sendall(b'cs5700spring2017 HELLO 1\n')
+s.sendall(b'cs5700spring2018 HELLO 1\n')
 data = s.recv(1024)
 
 # recieve STATUS
-print('Received', repr(data))
+print(data.decode())
 
 # create SOLUTION function
 def createSolution(num1, operator, num2):
@@ -31,13 +32,39 @@ def createSolution(num1, operator, num2):
 	elif (operator == "*"):
 		return num1 * num2
 	elif (operator == "/"):
-		return math.floor(num1 / num2)
+		return int(num1 // num2)
 	else:
+		print("fucked up")
 		return num1 + num2
 
-# return solution
+# set vals
+def sendSolution(d):
+	
+	# setup
+	parsed = d.decode().split(" ")
+	firstArg = int(parsed[2])
+	operator = parsed[3]
+	secondArg = int(parsed[4].split("\n")[0])
+
+	# return
+	solution = createSolution(firstArg, operator, secondArg)
+	msg = 'cs5700spring2018 '+str(solution)+'\n'
+	s.sendall(msg.encode())
+	response = s.recv(1024)
+
+	# log to terminal
+	print(msg)
+	print(response.decode())
+
+	# recurse or end
+	if "BYE" not in response.decode():
+		sendSolution(response)
+	else:
+		print(d.decode().split(" ")[0])
 
 
+# call function
+sendSolution(data)
 
 # handle BYE
 s.close()

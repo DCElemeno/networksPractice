@@ -1,7 +1,6 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 # set vals
-verbose='false'
 pflag='false' # <optional> specifies port
 sflag='false' # <optional> if given should use ssl encryped socket
 hname="${@:(-2):1}" # <required> the hostname
