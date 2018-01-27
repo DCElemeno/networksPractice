@@ -61,14 +61,11 @@ def sendSolution(d):
 		sendSolution(response)
 	else:
 		print(d.decode().split(" ")[0])
+		s.close()
 
 
 # call function
 sendSolution(data)
 
-# handle BYE
-s.close()
-
-
 # debugging stuff
-print('arguments are ',sflag,', ',pflag,', ',hname,', ',nuid,', ')
+# print('arguments are ',sflag,', ',pflag,', ',hname,', ',nuid,', ')
